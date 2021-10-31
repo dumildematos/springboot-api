@@ -1,9 +1,7 @@
 package com.amigoscode.springbootapi.student;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -11,9 +9,9 @@ import java.util.List;
 @RequestMapping("api/v1/student")
 public class StudentController {
 
-    @Autowired
     private final StudentService studentService;
 
+    @Autowired
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
@@ -21,5 +19,11 @@ public class StudentController {
     @GetMapping
     public List<Student> getStudent () {
         return studentService.getStudents();
+    }
+
+
+    @PostMapping
+    public void registerNewStudent(@RequestBody Student student) {
+        studentService.addNewStudent(student);
     }
 }
